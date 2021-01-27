@@ -44,8 +44,9 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
-				box.css("left", newPositionX);
+			function moveBoxTo(newPositionX, newPositionY) {
+                box.css("left", newPositionX);
+                box.css("top", newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -59,7 +60,12 @@
 			
 			// TODO 2 - Variable declarations 
 			
-
+            var positionX = 0;
+            var positionY = 0;
+            var points = 0;
+            var speed = 10;
+            var speedY = 5;
+            var boardHeight = jQuery(window).height();
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -67,8 +73,23 @@
 			turn it around! 
 			*/
 			function update() {
-				
+                positionX = positionX + speed;
+                positionY = positionY + speedY;
+                moveBoxTo(positionX, positionY);
+                
+                if (positionX > boardWidth) {
+                    speed = -speed;
+                }
+                else if (positionX < 0) {
+                    speed = -speed;
+                }
 
+                if (positionY < 400) {
+                    speedY = -speedY;
+                }
+                else if (positionY > boardHeight) {
+                    speedY = -speedY;
+                }
 			};
 
 			/* 
@@ -77,9 +98,18 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				
+                positionX = 0;
+                
+                points = points + 1;
 
+                changeBoxText(points);
 
+                if (speed > 0) {
+                    speed = speed + 3;
+                }
+                else if (speed < 0) {
+                    speed = speed - 3;
+                }
 			};
 		})();
 	</script>
