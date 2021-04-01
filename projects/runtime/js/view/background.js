@@ -36,20 +36,47 @@ var background = function (window) {
             // TODO: 2 - Part 2
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
+            var backgroundFill = draw.rect(canvasWidth,groundY,'black');
             background.addChild(backgroundFill);
             
             // TODO: 3 - Add a moon and starfield
-            
+
+           for (var i = 0; i < 600; i++) {
+                var circle = draw.circle(2,'white','LightGray',2);
+                circle.x = canvasWidth*Math.random();
+                circle.y = groundY*Math.random();
+                background.addChild(circle);
+            }
+
+            var moon = draw.bitmap('img/moon.png');
+            moon.x = canvasWidth - 170;
+            moon.y = groundY - 440;
+            moon.scaleX = 1.0;
+            moon.scaleY = 1.0;
+            background.addChild(moon);
             
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
+            for(var i=0;i<5;++i) {
+                var buildingHeight = Math.random()*250;
+                var building = draw.rect(75,buildingHeight,'blue','gray',5);
+                building.x = 200*i;
+                building.y = groundY-buildingHeight;
+                background.addChild(building);
+                buildings.push(building);
+            }
             
             // TODO 4: Part 1 - Add a tree
-            
+            tree = draw.bitmap('img/tree.png');
+            tree.x = 0;
+            tree.y = groundY - 240;
+            background.addChild(tree);
             
         } // end of render function - DO NOT DELETE
-        
+        var tree;
+        var buildings = [];
+        /*You must make the tree variable there because of something known as "scope". Essentially,
+        by making the tree variable outside of the render function, it can be used both in the render and the
+        update functions.*/
         
         // Perform background animation
         // called on each timer "tick" - 60 times per second
@@ -60,10 +87,17 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            
+            tree.x = tree.x - 3;
+
+            if (tree.x < -200) {
+                tree.x = canvasWidth;
+            }
             
             // TODO 5: Part 2 - Parallax
-            
+            for (var i = 0; i < buildings.length; i++) {
+                var building = buildings[i];
+                building.x = building.x - 1;
+            }
 
         } // end of update function - DO NOT DELETE
         
