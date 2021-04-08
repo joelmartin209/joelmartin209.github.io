@@ -16,12 +16,39 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "sawblade", "x": 400, "y": groundY },
-                { "type": "sawblade", "x": 600, "y": groundY },
-                { "type": "sawblade", "x": 900, "y": groundY },
-                { "type": "enemy", "x": 1000, "y": groundY-50 },
-                //{ "type": "lego", "x": 1500, "y": groundY },
-                { "type": "reward", "x": 1750, "y": groundY-70 },
+                { "type": "sawblade", "x": 400, "y": groundY-20 },
+                { "type": "sawblade", "x": 500, "y": groundY-100 },
+                { "type": "sawblade", "x": 600, "y": groundY-30 },
+                { "type": "sawblade", "x": 900, "y": groundY-20 },
+                { "type": "sawblade", "x": 1100, "y": groundY-20 },
+                { "type": "sawblade", "x": 1200, "y": groundY-100 },
+                { "type": "sawblade", "x": 1500, "y": groundY-100 },
+                { "type": "sawblade", "x": 1600, "y": groundY-30 },
+                { "type": "sawblade", "x": 1800, "y": groundY-40 },
+                { "type": "sawblade", "x": 1900, "y": groundY-100 },
+                { "type": "sawblade", "x": 2100, "y": groundY-20 },
+                { "type": "sawblade", "x": 2400, "y": groundY-10 },
+                { "type": "sawblade", "x": 2600, "y": groundY-100 },
+                { "type": "sawblade", "x": 2700, "y": groundY },
+                { "type": "sawblade", "x": 2900, "y": groundY-100 },
+                { "type": "sawblade", "x": 3000, "y": groundY-30 },
+                { "type": "sawblade", "x": 3300, "y": groundY-20 },
+                { "type": "enemy", "x": 300, "y": groundY-210 },
+                { "type": "enemy", "x": 500, "y": groundY-210 },
+                { "type": "enemy", "x": 600, "y": groundY-210 },
+                { "type": "enemy", "x": 700, "y": groundY-210 },
+                { "type": "enemy", "x": 800, "y": groundY-210 },
+                { "type": "enemy", "x": 1000, "y": groundY-210 },
+                { "type": "enemy", "x": 1100, "y": groundY-210 },
+                { "type": "enemy", "x": 1300, "y": groundY-210 },
+                { "type": "enemy", "x": 1500, "y": groundY-210 },
+                { "type": "enemy", "x": 1600, "y": groundY-210 },
+                { "type": "enemy", "x": 1800, "y": groundY-210 },
+                { "type": "spike", "x": 1500 },
+                { "type": "reward", "x": 450, "y": groundY-90 },
+                { "type": "reward", "x": 850, "y": groundY-90 },
+                { "type": "reward", "x": 1250, "y": groundY-90 },
+                { "type": "reward", "x": 1750, "y": groundY-90 },
             ]
         };
         for (var i = 0; i < levelData.gameItems.length; i++) {
@@ -34,8 +61,8 @@ var level01 = function (window) {
                 createSawBlade(objectX, objectY);
             } else if (type === "enemy") {
                 createEnemy(objectX, objectY);
-            } else if (type === "lego") {
-                createLego(objectX);
+            } else if (type === "spike") {
+                createSpike(objectX);
             } else {
                 createReward(objectX, objectY);
             }
@@ -52,7 +79,7 @@ var level01 = function (window) {
             var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
             
             sawBladeHitZone.x = x;
-            sawBladeHitZone.y = groundY - y;
+            sawBladeHitZone.y = y;
             game.addGameItem(sawBladeHitZone);
 
             var obstacleImage = draw.bitmap('img/sawblade.png');
@@ -61,23 +88,23 @@ var level01 = function (window) {
             obstacleImage.x = -25;
             obstacleImage.y = -25;
         }
-        /*
-        function createLego(x) {
+        
+        function createSpike(x) {
             var hitZoneSize = 50;
             var damageFromObstacle = 10;
-            var legoHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+            var spikeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
             
-            legoHitZone.x = x;
-            legoHitZone.y = groundY;
-            game.addGameItem(legoHitZone);
+            spikeHitZone.x = x;
+            spikeHitZone.y = groundY;
+            game.addGameItem(spikeHitZone);
 
-            var obstacleImage = draw.bitmap('https://lh3.googleusercontent.com/proxy/LG0W9Uezc5EbcSFCcr8u3g3EqaKJScXSQg4kJMXhk_Ej8Knt9cuXjZbmCBUTlWgu9HFLLCMCcV-89g_ZGkPTtXLP6k9VnVxAHIp6Dt2ilC5V894waUi_bUdolBq6WTylUcl7NcLMC6k');
-            legoHitZone.addChild(obstacleImage);
+            var obstacleImage = draw.bitmap(triangle(spikeHitZone.x-10, groundY, spikeHitZone.x+10, groundY, spikeHitZone, groundY-20));
+            spikeHitZone.addChild(obstacleImage);
 
             obstacleImage.x = -50;
             obstacleImage.y = -50;
         }
-        */
+        
 
         function createEnemy(x, y) {
             var enemy = game.createGameItem('enemy',25);
@@ -101,6 +128,7 @@ var level01 = function (window) {
             enemy.onProjectileCollision = function(){
                 console.log("Halle has hit the enemy.");
                 game.increaseScore(100);
+                enemy.fadeOut();
             }
         }
 
@@ -116,10 +144,11 @@ var level01 = function (window) {
 
             game.addGameItem(reward);
             reward.velocityX = -1;
+            reward.rotationalVelocity = 20;
 
             reward.onPlayerCollision = function() {
                 game.changeIntegrity(30);
-                game.fadeOut();
+                reward.fadeOut();
             }
         }
         // DO NOT EDIT CODE BELOW HERE

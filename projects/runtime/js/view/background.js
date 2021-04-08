@@ -56,9 +56,9 @@ var background = function (window) {
             background.addChild(moon);
             
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            for(var i=0;i<5;++i) {
+            for(var i=0;i<20;++i) {
                 var buildingHeight = Math.random()*250;
-                var building = draw.rect(75,buildingHeight,'blue','gray',5);
+                var building = draw.rect(75,buildingHeight,'white','gray',5);
                 building.x = 200*i;
                 building.y = groundY-buildingHeight;
                 background.addChild(building);
@@ -66,13 +66,16 @@ var background = function (window) {
             }
             
             // TODO 4: Part 1 - Add a tree
+            /*
             tree = draw.bitmap('img/tree.png');
             tree.x = 0;
             tree.y = groundY - 240;
             background.addChild(tree);
+            */
             
         } // end of render function - DO NOT DELETE
-        var tree;
+
+        //var tree
         var buildings = [];
         /*You must make the tree variable there because of something known as "scope". Essentially,
         by making the tree variable outside of the render function, it can be used both in the render and the
@@ -87,12 +90,14 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x - 3;
+            //tree.x = tree.x - 3;
 
+            /*
             if (tree.x < -200) {
                 tree.x = canvasWidth;
             }
-            
+            */
+
             // TODO 5: Part 2 - Parallax
             for (var i = 0; i < buildings.length; i++) {
                 var building = buildings[i];
