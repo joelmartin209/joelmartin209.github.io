@@ -81,7 +81,7 @@ var level01 = function (window) {
             sawBladeHitZone.y = y;
             game.addGameItem(sawBladeHitZone);
 
-            var obstacleImage = draw.bitmap('img/sawblade.png');
+            var obstacleImage = draw.bitmap('img/sawblade2.0.png');
             sawBladeHitZone.addChild(obstacleImage);
 
             obstacleImage.x = -25;
@@ -107,7 +107,7 @@ var level01 = function (window) {
 
         function createEnemy(x, y) {
             var enemy = game.createGameItem('enemy',25);
-            var redSquare = draw.rect(50,50,'red');
+            var redSquare = draw.bitmap('img/enemy-unit.png');
             redSquare.x = -25;
             redSquare.y = -25;
             enemy.addChild(redSquare);
