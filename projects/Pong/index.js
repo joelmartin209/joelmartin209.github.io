@@ -82,7 +82,7 @@ function runProgram(){
     Note to self: Include a counter for the number of bounces
 
 
-
+    Note to self: Adding all this notation makes my code look more packed, don't care tho
 
 
 
@@ -96,22 +96,22 @@ function runProgram(){
     var pie = event.which;
 
     if (pie === KEYCODE.W) {
-      movePaddleUp(leftPaddle);
+      movePaddleUp(leftPaddle); // Left paddle goes up
     }
     if (pie === KEYCODE.S) {
-      moveObject(leftPaddle);
+      moveObject(leftPaddle); // Left paddle goes down
     }
     if (pie === KEYCODE.UP) {
-      movePaddleUp(rightPaddle);
+      movePaddleUp(rightPaddle); // Right paddle goes up
     }
     if (pie === KEYCODE.DOWN) {
-      moveObject(rightPaddle);
+      moveObject(rightPaddle); // Right paddle goes down
     }
     if (pie === KEYCODE.NUM_1) {
-      cheat();
+      cheat(); // Shhhhh
     }
     if (pie === KEYCODE.NUM_2) {
-      otherCheat();
+      otherCheat(); // Shhhhh
     }
   }
 
@@ -119,16 +119,16 @@ function runProgram(){
     var pie = event.which;
 
     if (pie === KEYCODE.W) {
-      gameItem.speedY = 0;
+      gameItem.speedY = 0; // Stop movin'
     }
     if (pie === KEYCODE.S) {
-      gameItem.speedY = 0;
+      gameItem.speedY = 0; // Stop movin'
     }
     if (pie === KEYCODE.UP) {
-      gameItem.speedY = 0;
+      gameItem.speedY = 0; // Stop movin'
     }
     if (pie === KEYCODE.DOWN) {
-      gameItem.speedY = 0;
+      gameItem.speedY = 0; // Stop movin'
     }
   }
 
@@ -154,44 +154,44 @@ function runProgram(){
   }
 
   function moveObject(object) {
-    object.x += object.speedX;
-    object.y += object.speedY;
+    object.x += object.speedX; // Move along the y-axis
+    object.y += object.speedY; // Move along the x-axis
 
-    $(object.id).css("left", object.x);
-    $(object.id).css("top", object.y);
+    $(object.id).css("left", object.x); // Shows horizontal movement
+    $(object.id).css("top", object.y); // Shows vertical movement
   }
 
   function movePaddleUp(object) {
-    object.y -= object.speedY;
-    $(object.id).css("top", object.y);
+    object.y -= object.speedY; // Paddle goes up
+    $(object.id).css("top", object.y); // Show paddle movement
   }
 
   function wallCollision(object, isPaddle) {
     if (isPaddle && (object.y > Math.min(BOARD_HEIGHT - object.height, object.y))) {
-      object.y = BOARD_HEIGHT - object.height - 10;
+      object.y = BOARD_HEIGHT - object.height - 10; // Prevents the paddle from going beyond the board
     }
     else if (isPaddle && (object.y < Math.max(0, object.y))) {
-      object.y = 20;
+      object.y = 20; // Prevents the paddle from going beyond the board
     }
     if(object.x > Math.min(BOARD_WIDTH - object.width, object.x) || object.x < Math.max(0, object.x)) {
-      object.speedX = -object.speedX;
+      object.speedX = -object.speedX; // Didn't feel like removing this
 
       if(object.x > Math.min(BOARD_WIDTH - object.width, object.x)) {
-        score1++;
-        startBall();
+        score1++; // Give points to winning player
+        startBall(); // Reset the ball
       }
       if(object.x < Math.max(0, object.x)) {
-        score2++;
-        startBall();
+        score2++; // Give points to winning player
+        startBall(); // Reset the ball
       }
     }
     if(object.y > Math.min(BOARD_HEIGHT - object.height, object.y) || object.y < Math.max(0, object.y)) {
-      object.speedY = -object.speedY;
+      object.speedY = -object.speedY; // Bounce of the top & bottom of the walls
     }
   }
 
   function displayScore(obj ,score) {
-    $(obj.id).append("<p>").text("Score: " + score);
+    $(obj.id).append("<p>").text("Score: " + score); // Show da score
   }
 
   function doCollide(bowl, paddle) {
@@ -224,13 +224,13 @@ function runProgram(){
         }
         bowl.speedX = -bowl.speedX; // Reverse ball direction
       } else {
-        bowl.speedY = bowl.speedY;
+        bowl.speedY = bowl.speedY; // I wanted to put an else statement but didn't know what to put in it
       }
   }  
 
   function checkForVictory() {
     if (score1 >= 10 || score2 >= 10) {
-      endGame();
+      endGame(); // I don't want to play infinitely
     }
   }
 
