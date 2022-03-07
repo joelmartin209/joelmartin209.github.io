@@ -84,7 +84,7 @@ function runProgram(){
 
     Note to self: Adding all this notation makes my code look more packed, don't care tho
 
-
+    Note to self: Do what is in the "Note to self" zone
 
 
   */
