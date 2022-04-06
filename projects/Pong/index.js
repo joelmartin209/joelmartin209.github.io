@@ -41,6 +41,8 @@ function runProgram(){
   var rightPaddle = GameItem("#rightPaddle", 25, 0);
   var player1Score = GameItem("#player1Score", 0, 0);
   var player2Score = GameItem("#player2Score", 0, 0);
+  // create a button variable and then hide it
+  //var resetButton = GameItem("#resetButton", 0, 0);
 
   var score1 = 0;
   var score2 = 0;
@@ -232,6 +234,13 @@ function runProgram(){
     if (score1 >= 10 || score2 >= 10) {
       endGame(); // I don't want to play infinitely
     }
+  }
+
+  function resetButton() {
+    // Make button visible with .show()
+    // Reveal button with .hide()
+    // If button is clicked hide button
+    // If button is clicked run runProgram();
   }
 
   function cheat() {

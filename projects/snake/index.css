@@ -1,0 +1,39 @@
+
+body {
+  background-color: darkgreen;
+}
+
+#board {
+  width: 440px;
+  height: 440px;
+  border: 1px solid white;
+  background-color: black;
+  position: relative;
+}
+
+.snek, #snek {
+  background-color: lime;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 1px;
+  left: 100px;  /* Uncomment if you want to set a "starting" position */
+  top: 100px;  /* Uncomment if you want to set a "starting" position */
+}
+
+#snekHead {
+  background-color: green;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 1px;
+  left: 100px;
+  top: 80px;
+}
+
+#apple {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
